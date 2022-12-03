@@ -14,6 +14,8 @@ extension BuildContextExtensions on BuildContext {
 
   bool get isTablet => responsiveWidth > 600;
 
+  bool get isDekstop => responsiveWidth > 700;
+
   double marginHorToViewport(double value) {
     final responsiveValue = value.w * 2;
     final widthPercent = responsiveWidth * 1;

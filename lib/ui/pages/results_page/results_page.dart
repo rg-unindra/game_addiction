@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:game_addiction/core/models/answer.dart';
 import 'package:game_addiction/core/models/classification.dart';
@@ -7,6 +8,7 @@ import 'package:game_addiction/core/models/question.dart';
 import 'package:game_addiction/core/provider/answer_provider.dart';
 import 'package:game_addiction/core/provider/user_provider.dart';
 import 'package:game_addiction/core/utils/extensions/extensions.dart';
+import 'package:game_addiction/ui/widgets/widgets.dart';
 
 class ResultsPage extends ConsumerStatefulWidget {
   const ResultsPage({super.key});
@@ -22,89 +24,92 @@ class _ResultsPageConsumerState extends ConsumerState<ResultsPage> {
   @override
   Widget build(BuildContext context) {
     final user = ref.watch(userProvider);
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverSafeArea(
-            sliver: SliverPadding(
-              padding: const EdgeInsets.fromLTRB(20, 70, 20, 30).r(context),
-              sliver: SliverToBoxAdapter(
-                child: Text(
-                  "Hasil dari Test Kecanduan Game ${user.name}",
-                  style: TextStyle(
-                    fontSize: context.responsiveDoubleSP(20),
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+    return AnnotatedRegion(
+      value: SystemUiOverlayStyle.light,
+      child: WebScaffold(
+        child: Scaffold(
+          body: CustomScrollView(
+            slivers: [
+              SliverSafeArea(
+                sliver: SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(20, 70, 20, 30).r(context),
+                  sliver: SliverToBoxAdapter(
+                    child: Text(
+                      "Hasil dari Test Kecanduan Game ${user.name}",
+                      style: TextStyle(
+                        fontSize: context.responsiveDoubleSP(20),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20).r(context),
-            sliver: SliverToBoxAdapter(
-              child: SizedBox.square(
-                dimension: context.responsiveDoubleR(100),
-                child: PieChart(
-                  PieChartData(
-                    pieTouchData: PieTouchData(
-                      touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                        setState(() {
-                          if (!event.isInterestedForInteractions ||
-                              pieTouchResponse == null ||
-                              pieTouchResponse.touchedSection == null) {
-                            _touchedIndex = -1;
-                            return;
-                          }
-                          _touchedIndex = pieTouchResponse
-                              .touchedSection!.touchedSectionIndex;
-                        });
-                      },
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20).r(context),
+                sliver: SliverToBoxAdapter(
+                  child: SizedBox.square(
+                    dimension: context.responsiveDoubleR(100),
+                    child: PieChart(
+                      PieChartData(
+                        pieTouchData: PieTouchData(
+                          touchCallback: (event, pieTouchResponse) {
+                            setState(() {
+                              if (!event.isInterestedForInteractions ||
+                                  pieTouchResponse == null ||
+                                  pieTouchResponse.touchedSection == null) {
+                                _touchedIndex = -1;
+                                return;
+                              }
+                              _touchedIndex = pieTouchResponse
+                                  .touchedSection!.touchedSectionIndex;
+                            });
+                          },
+                        ),
+                        borderData: FlBorderData(show: false),
+                        sectionsSpace: 0,
+                        centerSpaceRadius: context.responsiveDoubleR(50),
+                        sections: showingSections(),
+                      ),
                     ),
-                    borderData: FlBorderData(
-                      show: false,
-                    ),
-                    sectionsSpace: 0,
-                    centerSpaceRadius: 40,
-                    sections: showingSections(),
                   ),
                 ),
               ),
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(20, 40, 20, 30).r(context),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final item = ClassificationType.values[index];
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(20, 40, 20, 30).r(context),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      final item = ClassificationType.values[index];
 
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 4).r(context),
-                    child: Row(
-                      children: [
-                        SizedBox.square(
-                          dimension: context.responsiveDoubleR(6),
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(color: item.toColor),
-                          ),
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 4).r(context),
+                        child: Row(
+                          children: [
+                            SizedBox.square(
+                              dimension: context.responsiveDoubleR(6),
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(color: item.toColor),
+                              ),
+                            ),
+                            SizedBox(width: context.responsiveDoubleW(10)),
+                            Text(
+                              item.toText,
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(width: context.responsiveDoubleW(10)),
-                        Text(
-                          item.toText,
-                          style: const TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                childCount: ClassificationType.values.length,
+                      );
+                    },
+                    childCount: ClassificationType.values.length,
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

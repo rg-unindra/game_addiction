@@ -39,127 +39,129 @@ class _FormQuestionPageState extends State<FormQuestionPage> {
     final Size size = MediaQuery.of(context).size;
     final ThemeData theme = Theme.of(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Pertanyaan"),
-        leading: const DefaultBackButton(),
-        centerTitle: true,
-        bottom: PreferredSize(
-          preferredSize: Size(size.width, 16),
-          child: AnimatedBuilder(
-            animation: _controller,
-            builder: (context, index) => StepProgress(
-              currentStep: _currentStep,
-              step: questions.length,
-            ),
-          ),
-        ),
-      ),
-      body: Stack(
-        children: [
-          Positioned(
-            bottom: 0,
-            child: Opacity(
-              opacity: .2,
-              child: Image.asset(
-                'assets/images/bg_splash.png',
-                fit: BoxFit.fitWidth,
+    return WebScaffold(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Pertanyaan"),
+          leading: const DefaultBackButton(),
+          centerTitle: true,
+          bottom: PreferredSize(
+            preferredSize: Size(size.width, 16),
+            child: AnimatedBuilder(
+              animation: _controller,
+              builder: (context, index) => StepProgress(
+                currentStep: _currentStep,
+                step: questions.length,
               ),
             ),
           ),
-          PageView.builder(
-            controller: _controller,
-            itemCount: questions.length,
-            onPageChanged: (index) {
-              setState(() {
-                _currentStep = index;
-              });
-            },
-            itemBuilder: (context, index) {
-              final question = questions[index];
-              return DefaultTextStyle(
-                style: theme.textTheme.caption!.copyWith(
-                  color: Colors.white,
+        ),
+        body: Stack(
+          children: [
+            Positioned(
+              bottom: 0,
+              child: Opacity(
+                opacity: .2,
+                child: Image.asset(
+                  'assets/images/bg_splash.png',
+                  fit: BoxFit.fitWidth,
                 ),
-                child: SizedBox.expand(
-                  child: Consumer(
-                    builder: (context, ref, child) {
-                      final answer = ref.watch(answerProvider);
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                            ).r(context),
-                            child: Text(
-                              "${index + 1}. ${question.title}",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontSize: context.responsiveDoubleSP(24),
+              ),
+            ),
+            PageView.builder(
+              controller: _controller,
+              itemCount: questions.length,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentStep = index;
+                });
+              },
+              itemBuilder: (context, index) {
+                final question = questions[index];
+                return DefaultTextStyle(
+                  style: theme.textTheme.caption!.copyWith(
+                    color: Colors.white,
+                  ),
+                  child: SizedBox.expand(
+                    child: Consumer(
+                      builder: (context, ref, child) {
+                        final answer = ref.watch(answerProvider);
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ).r(context),
+                              child: Text(
+                                "${index + 1}. ${question.title}",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: context.responsiveDoubleSP(24),
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(height: context.responsiveDoubleH(20)),
-                          ...List.generate(
-                            question.classifications.length,
-                            (i) {
-                              final classification =
-                                  question.classifications[i];
-                              final answerIndex =
-                                  answer.indexOfAnswer(question);
-                              final hasAnswer = answerIndex != -1;
-                              final isSelected = hasAnswer &&
-                                  answer[answerIndex].answerClassification ==
-                                      classification;
+                            SizedBox(height: context.responsiveDoubleH(20)),
+                            ...List.generate(
+                              question.classifications.length,
+                              (i) {
+                                final classification =
+                                    question.classifications[i];
+                                final answerIndex =
+                                    answer.indexOfAnswer(question);
+                                final hasAnswer = answerIndex != -1;
+                                final isSelected = hasAnswer &&
+                                    answer[answerIndex].answerClassification ==
+                                        classification;
 
-                              return DefaultFadeTransition(
-                                delayDuration: Duration(
-                                  milliseconds: (i * 100),
-                                ),
-                                child: ClassficationCard(
-                                  classification: classification,
-                                  isSelected: isSelected,
-                                  margin: const EdgeInsets.fromLTRB(
-                                    20,
-                                    0,
-                                    20,
-                                    10,
-                                  ).r(context),
-                                  onTap: () {
-                                    final answer = Answer(
-                                      question: question,
-                                      answerClassification: classification,
-                                    );
-
-                                    ref
-                                        .read(answerProvider.notifier)
-                                        .add(answer, question);
-
-                                    if (index == questions.length - 1) {
-                                      context.goNamed(Constans.success);
-                                    } else {
-                                      _controller.nextPage(
-                                        duration:
-                                            const Duration(milliseconds: 600),
-                                        curve: Curves.fastOutSlowIn,
+                                return DefaultFadeTransition(
+                                  delayDuration: Duration(
+                                    milliseconds: (i * 100),
+                                  ),
+                                  child: ClassficationCard(
+                                    classification: classification,
+                                    isSelected: isSelected,
+                                    margin: const EdgeInsets.fromLTRB(
+                                      20,
+                                      0,
+                                      20,
+                                      10,
+                                    ).r(context),
+                                    onTap: () {
+                                      final answer = Answer(
+                                        question: question,
+                                        answerClassification: classification,
                                       );
-                                    }
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-                        ],
-                      );
-                    },
+
+                                      ref
+                                          .read(answerProvider.notifier)
+                                          .add(answer, question);
+
+                                      if (index == questions.length - 1) {
+                                        context.pushNamed(Constans.success);
+                                      } else {
+                                        _controller.nextPage(
+                                          duration:
+                                              const Duration(milliseconds: 600),
+                                          curve: Curves.fastOutSlowIn,
+                                        );
+                                      }
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                   ),
-                ),
-              );
-            },
-          ),
-        ],
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
     // return Scaffold(

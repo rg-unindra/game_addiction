@@ -5,11 +5,13 @@ class InteractiveWidget extends StatefulWidget {
     super.key,
     required this.child,
     required this.onTap,
+    this.disabled = false,
     this.minScale = 0.95,
   });
 
   final Widget child;
   final VoidCallback onTap;
+  final bool disabled;
   final double minScale;
 
   @override
@@ -47,21 +49,31 @@ class _InteractiveWidgetState extends State<InteractiveWidget>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.onTap,
-      onTapDown: (_) => _controller.forward(),
-      onTapUp: (_) => _controller.reverse(),
-      onTapCancel: () {
-        _controller.reverse();
-        widget.onTap();
-      },
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) => Transform.scale(
-          scale: _animation.value,
-          child: child,
+    return Opacity(
+      opacity: widget.disabled ? 0.4 : 1.0,
+      child: GestureDetector(
+        onTap: widget.onTap,
+        onTapDown: (_) {
+          if (widget.disabled) return;
+          _controller.forward();
+        },
+        onTapUp: (_) {
+          if (widget.disabled) return;
+          _controller.reverse();
+        },
+        onTapCancel: () {
+          if (widget.disabled) return;
+          _controller.reverse();
+          widget.onTap();
+        },
+        child: AnimatedBuilder(
+          animation: _controller,
+          builder: (context, child) => Transform.scale(
+            scale: _animation.value,
+            child: child,
+          ),
+          child: widget.child,
         ),
-        child: widget.child,
       ),
     );
   }

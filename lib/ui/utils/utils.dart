@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppThemeData {
   static const MaterialColor myColor = MaterialColor(
@@ -38,7 +37,7 @@ class AppThemeData {
       highlightColor: myColor.withOpacity(.3),
       splashColor: myColor.shade200.withOpacity(.2),
       hoverColor: myColor.shade100.withOpacity(.1),
-      textTheme: GoogleFonts.quicksandTextTheme(),
+      fontFamily: 'quicksand',
       tooltipTheme: const TooltipThemeData(
         decoration: BoxDecoration(
           color: darkColor,
@@ -72,7 +71,7 @@ class AppThemeData {
       highlightColor: myColor.withOpacity(.3),
       splashColor: myColor.shade200.withOpacity(.2),
       hoverColor: myColor.shade100.withOpacity(.1),
-      textTheme: GoogleFonts.quicksandTextTheme(),
+      fontFamily: 'quicksans',
       tooltipTheme: const TooltipThemeData(
         decoration: BoxDecoration(
           color: whiteColor,

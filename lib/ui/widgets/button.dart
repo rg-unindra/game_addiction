@@ -7,6 +7,7 @@ class DefaultButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onTap,
+    this.disabled = false,
     this.height = 44.0,
     this.width,
     this.backgroundColor,
@@ -15,6 +16,7 @@ class DefaultButton extends StatelessWidget {
 
   final String text;
   final VoidCallback onTap;
+  final bool disabled;
   final double height;
   final double? width;
   final Color? backgroundColor;
@@ -24,6 +26,7 @@ class DefaultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InteractiveWidget(
       onTap: onTap,
+      disabled: disabled,
       child: SizedBox(
         width: context.responsiveDoubleH(width ?? 200),
         child: Stack(

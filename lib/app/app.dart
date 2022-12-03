@@ -1,4 +1,9 @@
+import 'dart:async';
+
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:game_addiction/core/utils/constans.dart';
 import 'package:game_addiction/ui/pages/pages.dart';
@@ -13,7 +18,16 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
-class _AppState extends State<App> {
+class _AppState extends State<App> with AfterLayoutMixin {
+  @override
+  FutureOr<void> afterFirstLayout(BuildContext context) {
+    FlutterNativeSplash.remove();
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: SystemUiOverlay.values,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

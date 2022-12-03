@@ -1,5 +1,5 @@
 class Constans {
-  static const appName = 'Gemdic';
+  static const appName = 'Tanya';
   static const appDescription = 'Deteksi dini gejala kecanduan game online';
 
   static const splashPath = '/';

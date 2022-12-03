@@ -42,20 +42,22 @@ class _SuccessPageState extends State<SuccessPage> {
       SizedBox(height: context.responsiveDoubleH(30)),
       DefaultButton(
         text: "Lihat Hasil",
-        onTap: () => context.goNamed(Constans.results),
+        onTap: () => context.pushNamed(Constans.results),
       ),
     ];
 
-    return Scaffold(
-      body: SizedBox.expand(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(
-            children.length,
-            (index) => DefaultFadeTransition(
-              delayDuration: Duration(milliseconds: (index + 1) * 300),
-              withOffsetAnimation: true,
-              child: children[index],
+    return WebScaffold(
+      child: Scaffold(
+        body: SizedBox.expand(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              children.length,
+              (index) => DefaultFadeTransition(
+                delayDuration: Duration(milliseconds: (index + 1) * 300),
+                withOffsetAnimation: true,
+                child: children[index],
+              ),
             ),
           ),
         ),
