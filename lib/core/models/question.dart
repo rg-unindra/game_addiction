@@ -20,10 +20,6 @@ const questions = <Question>[
     title: "Lama waktu bermain game/hari?",
     classifications: [
       Classification(
-        value: "<1 jam",
-        type: ClassificationType.none,
-      ),
-      Classification(
         value: "<2 jam",
         type: ClassificationType.mild,
       ),
@@ -40,10 +36,6 @@ const questions = <Question>[
   Question(
     title: "Seberapa sering melewati batas waktu (3 Jam/hari) bermain game?",
     classifications: [
-      Classification(
-        value: "Sangat jarang",
-        type: ClassificationType.none,
-      ),
       Classification(
         value: "Jarang",
         type: ClassificationType.mild,
@@ -62,10 +54,6 @@ const questions = <Question>[
     title: "Harga HP?",
     classifications: [
       Classification(
-        value: "<1 juta",
-        type: ClassificationType.none,
-      ),
-      Classification(
         value: "<2 juta",
         type: ClassificationType.mild,
       ),
@@ -82,10 +70,6 @@ const questions = <Question>[
   Question(
     title: "Tingkat keseringan Berkata Kasar?",
     classifications: [
-      Classification(
-        value: "<1 jam",
-        type: ClassificationType.none,
-      ),
       Classification(
         value: "<2 jam",
         type: ClassificationType.mild,
@@ -104,10 +88,6 @@ const questions = <Question>[
     title: "Jumlah game yang di install?",
     classifications: [
       Classification(
-        value: "1",
-        type: ClassificationType.none,
-      ),
-      Classification(
         value: ">1",
         type: ClassificationType.mild,
       ),
@@ -124,10 +104,6 @@ const questions = <Question>[
   Question(
     title: "Mudah terpancing emosi?",
     classifications: [
-      Classification(
-        value: "Sangat jarang",
-        type: ClassificationType.none,
-      ),
       Classification(
         value: "Jarang",
         type: ClassificationType.mild,
@@ -146,10 +122,6 @@ const questions = <Question>[
     title: "Pengeluaran uang dalam game/bulan?",
     classifications: [
       Classification(
-        value: "< Rp50.000",
-        type: ClassificationType.none,
-      ),
-      Classification(
         value: "> Rp100.000",
         type: ClassificationType.mild,
       ),
@@ -166,10 +138,6 @@ const questions = <Question>[
   Question(
     title: "Sering Menolak Perintah Orang Tua?",
     classifications: [
-      Classification(
-        value: "Sangat jarang",
-        type: ClassificationType.none,
-      ),
       Classification(
         value: "Jarang",
         type: ClassificationType.mild,
@@ -188,10 +156,6 @@ const questions = <Question>[
     title: "Kuota yang dihabiskan perbulan?",
     classifications: [
       Classification(
-        value: "< 30 GB",
-        type: ClassificationType.none,
-      ),
-      Classification(
         value: "> 60 GB",
         type: ClassificationType.mild,
       ),
@@ -209,19 +173,15 @@ const questions = <Question>[
     title: "Sering Menunda Mengerjakan Tugas?",
     classifications: [
       Classification(
-        value: "Sangat jarang",
-        type: ClassificationType.none,
-      ),
-      Classification(
         value: "Jarang",
         type: ClassificationType.mild,
       ),
       Classification(
-        value: "biasa",
+        value: "Biasa",
         type: ClassificationType.moderate,
       ),
       Classification(
-        value: "sering",
+        value: "Sering",
         type: ClassificationType.serious,
       ),
     ],
@@ -229,10 +189,6 @@ const questions = <Question>[
   Question(
     title: "Seberapa sering membantu orang tua ?",
     classifications: [
-      Classification(
-        value: "Sangat jarang",
-        type: ClassificationType.none,
-      ),
       Classification(
         value: "Jarang",
         type: ClassificationType.mild,
@@ -251,10 +207,6 @@ const questions = <Question>[
     title: "Jam tidur harian?",
     classifications: [
       Classification(
-        value: "8 Jam",
-        type: ClassificationType.none,
-      ),
-      Classification(
         value: "6 Jam",
         type: ClassificationType.mild,
       ),
@@ -271,10 +223,6 @@ const questions = <Question>[
   Question(
     title: "Tingkat Sosialisasi?",
     classifications: [
-      Classification(
-        value: "Sangat jarang",
-        type: ClassificationType.none,
-      ),
       Classification(
         value: "Jarang",
         type: ClassificationType.mild,
@@ -293,10 +241,6 @@ const questions = <Question>[
     title: "Tingkat kefokusan berkurang",
     classifications: [
       Classification(
-        value: "Sangat jarang",
-        type: ClassificationType.none,
-      ),
-      Classification(
         value: "Jarang",
         type: ClassificationType.mild,
       ),
@@ -314,10 +258,6 @@ const questions = <Question>[
     title: "Reaksi ketika menemukan game baru",
     classifications: [
       Classification(
-        value: "Tidak perduli",
-        type: ClassificationType.none,
-      ),
-      Classification(
         value: "Biasa",
         type: ClassificationType.mild,
       ),
@@ -334,10 +274,6 @@ const questions = <Question>[
   Question(
     title: "Tingkat kepuasan saat menang bermain game?",
     classifications: [
-      Classification(
-        value: "Tidak perduli",
-        type: ClassificationType.none,
-      ),
       Classification(
         value: "Biasa",
         type: ClassificationType.mild,

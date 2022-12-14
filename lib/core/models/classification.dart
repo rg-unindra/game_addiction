@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:game_addiction/ui/utils/utils.dart';
 
 enum ClassificationType {
-  none,
   mild,
   moderate,
   serious,
@@ -25,8 +24,6 @@ class Classification extends Equatable {
 extension ClassificationTypeExtensions on ClassificationType {
   Color get toColor {
     switch (this) {
-      case ClassificationType.none:
-        return AppThemeData.greenColor;
       case ClassificationType.mild:
         return AppThemeData.blueColor;
       case ClassificationType.moderate:
@@ -38,8 +35,6 @@ extension ClassificationTypeExtensions on ClassificationType {
 
   String get toText {
     switch (this) {
-      case ClassificationType.none:
-        return "Tidak";
       case ClassificationType.mild:
         return "Ringan";
       case ClassificationType.moderate:

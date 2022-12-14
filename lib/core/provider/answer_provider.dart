@@ -22,4 +22,8 @@ class AnswerProvider extends StateNotifier<List<Answer>> {
       state = [...state, answer];
     }
   }
+
+  void reset() {
+    state = [];
+  }
 }

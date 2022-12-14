@@ -74,5 +74,18 @@ extension ListAnswerExtensions on List<Answer> {
     return 0;
   }
 
+  ClassificationType get classificationResults {
+    var type = ClassificationType.mild;
+    int temp = 0;
+    tableData.forEach((key, value) {
+      if (value.length > temp) {
+        type = key;
+        temp = value.length;
+      }
+    });
+
+    return type;
+  }
+
   int get groupLength => tableData.length;
 }

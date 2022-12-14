@@ -139,7 +139,7 @@ class _FormQuestionPageState extends State<FormQuestionPage> {
                                           .add(answer, question);
 
                                       if (index == questions.length - 1) {
-                                        context.pushNamed(Constans.success);
+                                        context.replaceNamed(Constans.success);
                                       } else {
                                         _controller.nextPage(
                                           duration:

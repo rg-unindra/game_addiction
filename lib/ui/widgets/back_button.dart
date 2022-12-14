@@ -15,14 +15,17 @@ class DefaultBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final iconColor = theme.iconTheme.color;
-    return InteractiveWidget(
-      onTap: () => Navigator.pop(context),
-      child: Center(
-        child: SvgPicture.asset(
-          'assets/icons/ic_back.svg',
-          color: color ?? iconColor,
-          height: context.responsiveDoubleR(24),
-          width: context.responsiveDoubleR(24),
+    return Visibility(
+      visible: Navigator.canPop(context),
+      child: InteractiveWidget(
+        onTap: () => Navigator.pop(context),
+        child: Center(
+          child: SvgPicture.asset(
+            'assets/icons/ic_back.svg',
+            color: color ?? iconColor,
+            height: context.responsiveDoubleR(24),
+            width: context.responsiveDoubleR(24),
+          ),
         ),
       ),
     );

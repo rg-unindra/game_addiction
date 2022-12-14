@@ -107,8 +107,9 @@ class _FormIdentityPageState extends ConsumerState<FormIdentityPage> {
                     ),
                     Center(
                       child: Text(
-                        "Gemdic",
+                        Constans.appName,
                         style: TextStyle(
+                          fontFamily: 'Yeseva',
                           fontSize: context.responsiveDoubleSP(30),
                         ),
                       ),

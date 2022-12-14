@@ -53,6 +53,7 @@ class _SplashPageState extends State<SplashPage> {
                       Text(
                         Constans.appName,
                         style: TextStyle(
+                          fontFamily: 'Yeseva',
                           fontSize: context.responsiveDoubleSP(50),
                         ),
                       ),
@@ -66,7 +67,7 @@ class _SplashPageState extends State<SplashPage> {
                       const SizedBox(height: 30),
                       DefaultButton(
                         width: 100,
-                        onTap: () => context.pushNamed(Constans.identity),
+                        onTap: () => context.replaceNamed(Constans.identity),
                         text: "Mulai",
                       ),
                     ],

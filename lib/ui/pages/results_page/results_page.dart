@@ -7,8 +7,10 @@ import 'package:game_addiction/core/models/classification.dart';
 import 'package:game_addiction/core/models/question.dart';
 import 'package:game_addiction/core/provider/answer_provider.dart';
 import 'package:game_addiction/core/provider/user_provider.dart';
+import 'package:game_addiction/core/utils/constans.dart';
 import 'package:game_addiction/core/utils/extensions/extensions.dart';
 import 'package:game_addiction/ui/widgets/widgets.dart';
+import 'package:go_router/go_router.dart';
 
 class ResultsPage extends ConsumerStatefulWidget {
   const ResultsPage({super.key});
@@ -24,6 +26,7 @@ class _ResultsPageConsumerState extends ConsumerState<ResultsPage> {
   @override
   Widget build(BuildContext context) {
     final user = ref.watch(userProvider);
+    final answers = ref.watch(answerProvider);
     return AnnotatedRegion(
       value: SystemUiOverlayStyle.light,
       child: WebScaffold(
@@ -104,6 +107,33 @@ class _ResultsPageConsumerState extends ConsumerState<ResultsPage> {
                       );
                     },
                     childCount: ClassificationType.values.length,
+                  ),
+                ),
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20).r(context),
+                sliver: SliverToBoxAdapter(
+                  child: Text(
+                    "Hasil kecanduan terhadap game online adalah ${answers.classificationResults.toText}",
+                    style: TextStyle(
+                      fontSize: context.responsiveDoubleSP(14),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 20).r(context),
+                sliver: SliverToBoxAdapter(
+                  child: DefaultButton(
+                    onTap: () {
+                      Router.neglect(
+                        context,
+                        () => context.goNamed(Constans.identity),
+                      );
+                      ref.read(answerProvider.notifier).reset();
+                    },
+                    text: "Test Ulang",
                   ),
                 ),
               ),

@@ -71,7 +71,7 @@ class AppThemeData {
       highlightColor: myColor.withOpacity(.3),
       splashColor: myColor.shade200.withOpacity(.2),
       hoverColor: myColor.shade100.withOpacity(.1),
-      fontFamily: 'quicksans',
+      fontFamily: 'quicksand',
       tooltipTheme: const TooltipThemeData(
         decoration: BoxDecoration(
           color: whiteColor,
